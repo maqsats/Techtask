@@ -1,6 +1,7 @@
 package com.intechbel.techtask
 
 import android.app.Application
+import com.intechbel.techtask.di.featureModules
 import com.intechbel.techtask.logger.Logger
 import com.intechbel.techtask.network.networkModules
 import com.intechbel.techtask.presentation.presentationModules
@@ -24,6 +25,9 @@ class TecktaskApplication : Application() {
             // Core modules
             modules(networkModules)
             modules(presentationModules)
+            
+            // Feature modules
+            modules(featureModules)
         }
     }
 

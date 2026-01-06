@@ -1,0 +1,13 @@
+package com.intechbel.techtask.feature.root.di
+
+import com.arkivanov.decompose.ComponentContext
+import com.intechbel.techtask.feature.root.presentation.core.IRootComponent
+import com.intechbel.techtask.feature.users.di.IUserComponentsFactory
+
+interface IRootComponentsFactory {
+    fun createRootComponent(
+        context: ComponentContext,
+        userComponentsFactory: IUserComponentsFactory,
+    ): IRootComponent
+}
+
