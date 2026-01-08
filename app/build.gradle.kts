@@ -32,21 +32,18 @@ android {
 }
 
 dependencies {
-    implementation(projects.core.shared)
+    // Core modules - only those directly used in app module
     implementation(projects.core.network)
-    implementation(projects.core.pagination)
     implementation(projects.core.presentation)
     implementation(projects.core.logger)
     implementation(projects.core.design)
-    
+
+    // Feature modules
     implementation(projects.feature.users)
     implementation(projects.feature.root)
 
-    implementation(libs.bundles.compose)
-    implementation(libs.bundles.koin)
+    implementation(libs.composeUI)
     implementation(libs.activityCompose)
     implementation(libs.coreKtx)
-    implementation(libs.decompose)
-    implementation(libs.decomposeJetpackCompose)
 }
 
