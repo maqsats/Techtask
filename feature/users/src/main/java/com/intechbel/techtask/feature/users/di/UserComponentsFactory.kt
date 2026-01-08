@@ -2,17 +2,20 @@ package com.intechbel.techtask.feature.users.di
 
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.mvikotlin.main.store.DefaultStoreFactory
-import com.intechbel.techtask.feature.users.presentation.core.IUserComponent
 import com.intechbel.techtask.feature.users.presentation.logic.UserComponent
+import com.intechbel.techtask.shared.di.provide
+import org.koin.core.component.KoinScopeComponent
+import org.koin.core.scope.Scope
 
-class UserComponentsFactory : IUserComponentsFactory {
+class UserComponentsFactory(override val scope: Scope) :
+    IUserComponentsFactory, KoinScopeComponent {
+
     override fun createUserComponent(
         context: ComponentContext,
-    ): IUserComponent {
-        return UserComponent(
-            componentContext = context,
-            storeFactory = DefaultStoreFactory(),
-        )
-    }
+    ) = UserComponent(
+        componentContext = context,
+        storeFactory = DefaultStoreFactory(),
+        pagingSource = provide(),
+    )
 }
 

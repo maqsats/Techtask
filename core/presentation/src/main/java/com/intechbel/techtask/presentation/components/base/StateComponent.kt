@@ -24,8 +24,10 @@ abstract class StateComponent<STATE : Any, LABEL : Any, INTENT : Any>(
     override val labelsFlow: Flow<LABEL>
         get() = store.labels
 
+    private val storeKey = "${this::class.java.name}#store"
+
     protected val store: Store<INTENT, STATE, LABEL> by lazy {
-        instanceKeeper.getStore {
+        instanceKeeper.getStore(key = storeKey) {
             storeCreation.invoke(storeFactory)
         }
     }

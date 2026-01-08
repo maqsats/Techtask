@@ -5,6 +5,6 @@ import kotlinx.serialization.Serializable
 @Serializable
 sealed interface UserLabel {
     @Serializable
-    data object None : UserLabel
+    data object OnNavigateToUserDetails : UserLabel
 }
 

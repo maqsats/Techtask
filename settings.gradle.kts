@@ -3,6 +3,7 @@ rootProject.name = "Techtask"
 include(
     ":app",
     // Core modules
+    ":core:design",
     ":core:network",
     ":core:pagination",
     ":core:presentation",

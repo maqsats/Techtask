@@ -13,7 +13,9 @@ import com.intechbel.techtask.feature.root.presentation.core.RootIntent
 import com.intechbel.techtask.feature.root.presentation.core.RootLabel
 import com.intechbel.techtask.feature.root.presentation.core.RootState
 import com.intechbel.techtask.feature.users.di.IUserComponentsFactory
+import com.intechbel.techtask.feature.users.presentation.core.UserLabel
 import com.intechbel.techtask.presentation.components.base.StateComponent
+import com.intechbel.techtask.presentation.utils.createBinder
 
 class RootComponent(
     componentContext: ComponentContext,
@@ -37,13 +39,26 @@ class RootComponent(
         componentContext: ComponentContext
     ): IRootComponent.Child =
         when (config) {
-            is RootConfiguration.Users -> IRootComponent.Child.Users(
-                userComponentsFactory.createUserComponent(componentContext)
-            )
+            is RootConfiguration.Users -> {
+                val component = userComponentsFactory.createUserComponent(componentContext)
+                component.createBinder(
+                    componentContext = componentContext,
+                    consumer = ::handleUserLabels
+                )
+                IRootComponent.Child.Users(component)
+            }
         }
 
     override val storeCreation: (StoreFactory) -> Store<RootIntent, RootState, RootLabel> = {
         RootStore(storeFactory = storeFactory)
+    }
+
+    private fun handleUserLabels(label: UserLabel) {
+        when (label) {
+            UserLabel.OnNavigateToUserDetails -> {
+                // Handle navigation to user details
+            }
+        }
     }
 }
 

@@ -1,6 +1,7 @@
 package com.intechbel.techtask.network
 
 import android.annotation.SuppressLint
+import com.chuckerteam.chucker.api.ChuckerCollector
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.intechbel.techtask.logger.Logger
 import com.intechbel.techtask.network.data.interceptors.TimeOutInterceptor
@@ -40,7 +41,14 @@ val networkModules = module {
     }
 
     single {
-        ChuckerInterceptor.Builder(this.androidApplication()).build()
+        ChuckerInterceptor.Builder(this.androidApplication())
+            .collector(
+                ChuckerCollector(
+                    context = this.androidApplication(),
+                    showNotification = true,
+                )
+            )
+            .build()
     }
 
     single {

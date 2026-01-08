@@ -1,14 +1,14 @@
 package com.intechbel.techtask.network.data.retrofit
 
 import android.accounts.NetworkErrorException
-import kotlinx.serialization.ExperimentalSerializationApi
-import kotlinx.serialization.json.Json
 import com.intechbel.techtask.logger.Logger
 import com.intechbel.techtask.network.R
 import com.intechbel.techtask.network.data.model.ErrorResponse
 import com.intechbel.techtask.shared.ApiResult
 import com.intechbel.techtask.shared.UiText
 import com.intechbel.techtask.shared.common_models.ErrorType
+import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.json.Json
 import okhttp3.Request
 import okio.IOException
 import okio.Timeout
@@ -99,7 +99,7 @@ internal class ApiResultCall<T>(
 }
 
 @OptIn(ExperimentalSerializationApi::class)
-private fun <T, T1> Response<T>?.convertToApiResult(): ApiResult<T1> {
+internal fun <T, T1> Response<T>?.convertToApiResult(): ApiResult<T1> {
     val errorBodyString = this?.errorBody()?.string()
     return try {
         val json = Json {
@@ -125,7 +125,7 @@ private fun <T, T1> Response<T>?.convertToApiResult(): ApiResult<T1> {
     }
 }
 
-private fun <T> Throwable.catchError(): ApiResult<T> {
+internal fun <T> Throwable.catchError(): ApiResult<T> {
     Logger.e(this, this.message)
     this.printStackTrace()
     return when (this) {

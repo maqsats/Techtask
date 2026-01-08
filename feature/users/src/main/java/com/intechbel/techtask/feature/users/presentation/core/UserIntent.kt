@@ -5,6 +5,6 @@ import kotlinx.serialization.Serializable
 @Serializable
 sealed interface UserIntent {
     @Serializable
-    data object None : UserIntent
+    data object OnUserClick : UserIntent
 }
 

@@ -6,13 +6,13 @@ import androidx.paging.PagingData
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import androidx.paging.cachedIn
+import com.intechbel.techtask.shared.ApiResult
+import com.intechbel.techtask.shared.common_models.PagingParam
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import com.intechbel.techtask.shared.ApiResult
-import com.intechbel.techtask.shared.common_models.PagingParam
 
 abstract class BasePagingSource<T : Any, Param : PagingParam> : PagingSource<Int, T>() {
 
@@ -62,7 +62,11 @@ abstract class BasePagingSource<T : Any, Param : PagingParam> : PagingSource<Int
         return LoadResult.Page(
             data = data,
             prevKey = if (nextPage == 0) null else nextPage - 1,
-            nextKey = if (data.isEmpty() || pagingUseCase().getPageSize(data, param) < PAGE_SIZE - 1) null else nextPage + 1
+            nextKey = if (data.isEmpty() || pagingUseCase().getPageSize(
+                    data,
+                    param
+                ) < PAGE_SIZE - 1
+            ) null else nextPage + 1
         )
     }
 
@@ -71,10 +75,10 @@ abstract class BasePagingSource<T : Any, Param : PagingParam> : PagingSource<Int
     }
 
     companion object {
-        const val PAGE_SIZE = 20
+        const val PAGE_SIZE = 50
         const val PREFETCH_DISTANCE = 1
         const val ENABLE_PLACEHOLDERS = false
-        const val INITIAL_LOAD_SIZE = 10
+        const val INITIAL_LOAD_SIZE = 50
     }
 }
 
