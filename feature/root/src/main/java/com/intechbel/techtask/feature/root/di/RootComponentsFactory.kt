@@ -4,17 +4,17 @@ import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.mvikotlin.main.store.DefaultStoreFactory
 import com.intechbel.techtask.feature.root.presentation.core.IRootComponent
 import com.intechbel.techtask.feature.root.presentation.logic.RootComponent
-import com.intechbel.techtask.feature.users.di.IUserComponentsFactory
+import com.intechbel.techtask.shared.di.provide
+import org.koin.core.component.KoinComponent
 
-class RootComponentsFactory : IRootComponentsFactory {
+class RootComponentsFactory : IRootComponentsFactory, KoinComponent {
     override fun createRootComponent(
         context: ComponentContext,
-        userComponentsFactory: IUserComponentsFactory,
     ): IRootComponent {
         return RootComponent(
             componentContext = context,
             storeFactory = DefaultStoreFactory(),
-            userComponentsFactory = userComponentsFactory,
+            userComponentsFactory = provide(),
         )
     }
 }

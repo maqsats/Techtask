@@ -12,6 +12,7 @@ include(
     // Feature modules
     ":feature:users",
     ":feature:root",
+    ":feature_sub:map",
 )
 
 pluginManagement {

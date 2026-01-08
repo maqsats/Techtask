@@ -17,5 +17,6 @@ dependencies {
     implementation(projects.core.network)
     implementation(projects.core.pagination)
     implementation(projects.core.presentation)
+    implementation(projects.featureSub.map)
 }
 

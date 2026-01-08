@@ -4,8 +4,11 @@ import com.intechbel.techtask.feature.users.domain.model.User
 import kotlinx.serialization.Serializable
 
 @Serializable
-sealed interface UserLabel {
-    @Serializable
-    data class OnNavigateToUserDetails(val user: User) : UserLabel
+data class UserDetailsState(
+    val user: User,
+) {
+    companion object {
+        fun initial(user: User) = UserDetailsState(user = user)
+    }
 }
 

@@ -13,6 +13,9 @@
         android:roundIcon="@android:mipmap/sym_def_app_icon"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat">
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
         <activity
             android:name=".MainActivity"
             android:exported="true"

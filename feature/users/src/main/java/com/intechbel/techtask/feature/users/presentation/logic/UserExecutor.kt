@@ -15,8 +15,8 @@ class UserExecutor(
 
     override fun executeIntent(intent: UserIntent) {
         when (intent) {
-            UserIntent.OnUserClick -> {
-                publish(UserLabel.OnNavigateToUserDetails)
+            is UserIntent.OnUserClick -> {
+                publish(UserLabel.OnNavigateToUserDetails(intent.user))
             }
         }
     }

@@ -1,6 +1,5 @@
 package com.intechbel.techtask.design.image
 
-import android.R
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -10,12 +9,13 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
 import androidx.paging.LoadState.Loading
@@ -23,7 +23,7 @@ import androidx.paging.LoadState.NotLoading
 import androidx.paging.compose.LazyPagingItems
 
 @Composable
-fun <T : Any> PaginationManager(
+fun <T : Any> ThPagination(
     modifier: Modifier = Modifier,
     pagingData: LazyPagingItems<T>,
     successView: @Composable (data: T) -> Unit,
@@ -133,8 +133,8 @@ private fun PaginationOnError(retry: () -> Unit) {
                 .padding(16.dp)
         ) {
             Icon(
-                painter = painterResource(id = R.drawable.ic_delete),
-                contentDescription = "Retry",
+                imageVector = Icons.Default.Refresh,
+                contentDescription = null,
                 tint = androidx.compose.material3.MaterialTheme.colorScheme.onErrorContainer,
                 modifier = Modifier
                     .size(24.dp)

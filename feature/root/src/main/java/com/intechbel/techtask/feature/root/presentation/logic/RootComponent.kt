@@ -4,6 +4,8 @@ import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.childStack
+import com.arkivanov.decompose.router.stack.pop
+import com.arkivanov.decompose.router.stack.pushNew
 import com.arkivanov.decompose.value.Value
 import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
@@ -13,14 +15,16 @@ import com.intechbel.techtask.feature.root.presentation.core.RootIntent
 import com.intechbel.techtask.feature.root.presentation.core.RootLabel
 import com.intechbel.techtask.feature.root.presentation.core.RootState
 import com.intechbel.techtask.feature.users.di.IUserComponentsFactory
+import com.intechbel.techtask.feature.users.presentation.core.UserDetailsLabel
 import com.intechbel.techtask.feature.users.presentation.core.UserLabel
 import com.intechbel.techtask.presentation.components.base.StateComponent
 import com.intechbel.techtask.presentation.utils.createBinder
+import com.intechbel.techtask.shared.di.Provider
 
 class RootComponent(
     componentContext: ComponentContext,
     storeFactory: StoreFactory,
-    private val userComponentsFactory: IUserComponentsFactory,
+    private val userComponentsFactory: Provider<IUserComponentsFactory>,
 ) : StateComponent<RootState, RootLabel, RootIntent>(componentContext, storeFactory),
     IRootComponent {
 
@@ -40,12 +44,24 @@ class RootComponent(
     ): IRootComponent.Child =
         when (config) {
             is RootConfiguration.Users -> {
-                val component = userComponentsFactory.createUserComponent(componentContext)
+                val component = userComponentsFactory.use.createUserComponent(componentContext)
                 component.createBinder(
                     componentContext = componentContext,
                     consumer = ::handleUserLabels
                 )
                 IRootComponent.Child.Users(component)
+            }
+
+            is RootConfiguration.UserDetails -> {
+                val component = userComponentsFactory.use.createUserDetailsComponent(
+                    context = componentContext,
+                    user = config.user,
+                )
+                component.createBinder(
+                    componentContext = componentContext,
+                    consumer = ::handleUserDetailsLabels
+                )
+                IRootComponent.Child.UserDetails(component)
             }
         }
 
@@ -55,9 +71,15 @@ class RootComponent(
 
     private fun handleUserLabels(label: UserLabel) {
         when (label) {
-            UserLabel.OnNavigateToUserDetails -> {
-                // Handle navigation to user details
+            is UserLabel.OnNavigateToUserDetails -> {
+                navigation.pushNew(RootConfiguration.UserDetails(label.user))
             }
+        }
+    }
+
+    private fun handleUserDetailsLabels(label: UserDetailsLabel) {
+        when (label) {
+            UserDetailsLabel.OnNavigateBack -> navigation.pop()
         }
     }
 }

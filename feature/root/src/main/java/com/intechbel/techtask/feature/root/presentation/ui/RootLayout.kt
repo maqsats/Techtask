@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.arkivanov.decompose.extensions.compose.subscribeAsState
 import com.intechbel.techtask.feature.root.presentation.core.IRootComponent
+import com.intechbel.techtask.feature.users.presentation.ui.UserDetailsLayout
 import com.intechbel.techtask.feature.users.presentation.ui.UserLayout
 
 @Composable
@@ -29,6 +30,13 @@ fun RootLayout(
                 UserLayout(
                     component = activeChild.component,
                     modifier = Modifier.fillMaxSize()
+                )
+            }
+
+            is IRootComponent.Child.UserDetails -> {
+                UserDetailsLayout(
+                    component = activeChild.component,
+                    modifier = Modifier.fillMaxSize(),
                 )
             }
         }

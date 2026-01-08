@@ -13,12 +13,6 @@ class RootStore(
     initialState = RootState.initial(),
     executorFactory = {
         RootExecutor()
-    },
-    reducer = { message ->
-        when (message) {
-            // Handle messages here when implemented
-            else -> this
-        }
-    },
+    }
 )
 

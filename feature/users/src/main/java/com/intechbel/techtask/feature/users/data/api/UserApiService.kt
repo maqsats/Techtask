@@ -10,7 +10,7 @@ interface UserApiService {
     fun getUsers(
         @Query("page") page: Int,
         @Query("results") results: Int = 50,
-        @Query("inc") includeFields: String = "name,email,picture",
+        @Query("inc") includeFields: String = "name,email,picture,phone,location",
         @Query("seed") seed: String = "techtask",
         @Query("noinfo") noInfo: Boolean = true,
     ): ApiResult<UserResponse>
