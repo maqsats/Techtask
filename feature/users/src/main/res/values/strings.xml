@@ -1,0 +1,12 @@
+<resources>
+    <string name="user_details_title">User details</string>
+    <string name="content_description_back">Back</string>
+    <string name="content_description_user_profile_picture">User profile picture</string>
+    <string name="user_email_label">Email</string>
+    <string name="user_phone_label">Phone</string>
+    <string name="user_location_title">Location</string>
+    <string name="user_address_label">Address</string>
+    <string name="user_loading_message">Loading…</string>
+    <string name="user_empty_message">No users found.</string>
+</resources>
+

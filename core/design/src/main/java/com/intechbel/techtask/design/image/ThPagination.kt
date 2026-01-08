@@ -16,11 +16,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
 import androidx.paging.LoadState.Loading
 import androidx.paging.LoadState.NotLoading
 import androidx.paging.compose.LazyPagingItems
+import com.intechbel.techtask.design.R
 
 @Composable
 fun <T : Any> ThPagination(
@@ -117,7 +119,7 @@ private fun PaginationLoader() {
             .padding(vertical = 16.dp),
         contentAlignment = Alignment.Center
     ) {
-        Text("Loading")
+        Text(stringResource(R.string.pagination_loading))
     }
 }
 

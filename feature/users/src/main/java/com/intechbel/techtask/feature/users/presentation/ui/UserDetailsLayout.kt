@@ -26,10 +26,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.intechbel.techtask.design.image.ThImage
+import com.intechbel.techtask.feature.users.R
 import com.intechbel.techtask.feature.users.presentation.core.IUserDetailsComponent
 import com.intechbel.techtask.feature.users.presentation.core.UserDetailsIntent
 import com.intechbel.techtask.feature_sub.map.presentation.MapCoordinates
@@ -52,12 +54,12 @@ fun UserDetailsLayout(
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
-                title = { Text(text = "User details") },
+                title = { Text(text = stringResource(R.string.user_details_title)) },
                 navigationIcon = {
                     IconButton(onClick = { component.accept(UserDetailsIntent.OnBackClick) }) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Back"
+                            contentDescription = stringResource(R.string.content_description_back)
                         )
                     }
                 }
@@ -82,7 +84,7 @@ fun UserDetailsLayout(
                         .height(120.dp)
                         .fillMaxWidth(0.35f),
                     image = user.picture,
-                    contentDescription = "User profile picture"
+                    contentDescription = stringResource(R.string.content_description_user_profile_picture)
                 )
                 Column(modifier = Modifier.weight(1f)) {
                     Text(
@@ -91,19 +93,22 @@ fun UserDetailsLayout(
                         fontWeight = FontWeight.Bold,
                     )
                     Spacer(modifier = Modifier.height(8.dp))
-                    DetailRow(label = "Email", value = user.email)
+                    DetailRow(label = stringResource(R.string.user_email_label), value = user.email)
                     user.phone?.takeIf { it.isNotBlank() }?.let {
-                        DetailRow(label = "Phone", value = it)
+                        DetailRow(label = stringResource(R.string.user_phone_label), value = it)
                     }
                 }
             }
 
             Text(
-                text = "Location",
+                text = stringResource(R.string.user_location_title),
                 fontSize = 18.sp,
                 fontWeight = FontWeight.SemiBold,
             )
-            DetailRow(label = "Address", value = user.location.formattedAddress)
+            DetailRow(
+                label = stringResource(R.string.user_address_label),
+                value = user.location.formattedAddress
+            )
 
             Box(
                 modifier = Modifier
