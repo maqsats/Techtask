@@ -37,6 +37,7 @@ dependencies {
     implementation(projects.core.pagination)
     implementation(projects.core.presentation)
     implementation(projects.core.logger)
+    implementation(projects.core.design)
     
     implementation(projects.feature.users)
     implementation(projects.feature.root)

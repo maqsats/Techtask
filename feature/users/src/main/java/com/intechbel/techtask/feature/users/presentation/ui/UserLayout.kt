@@ -14,11 +14,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.intechbel.techtask.design.image.ThImage
 import com.intechbel.techtask.design.image.ThPagination
+import com.intechbel.techtask.design.theme.AppTheme
 import com.intechbel.techtask.feature.users.R
 import com.intechbel.techtask.feature.users.domain.model.User
 import com.intechbel.techtask.feature.users.presentation.core.IUserComponent
@@ -47,7 +46,7 @@ fun UserLayout(
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(16.dp),
+                    .padding(AppTheme.dimens.padding.medium),
                 contentAlignment = Alignment.Center,
             ) {
                 Text(text = stringResource(R.string.user_loading_message))
@@ -57,7 +56,7 @@ fun UserLayout(
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(16.dp),
+                    .padding(AppTheme.dimens.padding.medium),
                 contentAlignment = Alignment.Center,
             ) {
                 Text(text = stringResource(R.string.user_empty_message))
@@ -74,7 +73,10 @@ private fun UserItem(
 ) {
     Box(
         modifier = modifier
-            .padding(horizontal = 16.dp, vertical = 12.dp)
+            .padding(
+                horizontal = AppTheme.dimens.padding.medium,
+                vertical = AppTheme.dimens.padding.small
+            )
             .clickable { onUserClick(user) },
     ) {
         Row(
@@ -83,7 +85,7 @@ private fun UserItem(
         ) {
             ThImage(
                 modifier = Modifier
-                    .padding(end = 16.dp)
+                    .padding(end = AppTheme.dimens.padding.medium)
                     .fillMaxWidth(0.2f),
                 image = user.picture
             )
@@ -92,19 +94,19 @@ private fun UserItem(
             ) {
                 Text(
                     text = "${user.name.title} ${user.name.first} ${user.name.last}",
-                    fontSize = 16.sp,
+                    fontSize = AppTheme.dimens.fontSize.fontSize16,
                     fontWeight = FontWeight.Bold,
                 )
                 Text(
                     text = user.email,
-                    fontSize = 14.sp,
+                    fontSize = AppTheme.dimens.fontSize.fontSize14,
                 )
                 Text(
                     text = listOfNotNull(
                         user.location.city.takeIf { it.isNotBlank() },
                         user.location.country.takeIf { it.isNotBlank() }
                     ).joinToString(", "),
-                    fontSize = 12.sp,
+                    fontSize = AppTheme.dimens.fontSize.fontSize12,
                 )
             }
         }

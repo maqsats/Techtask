@@ -17,12 +17,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
 import androidx.paging.LoadState.Loading
 import androidx.paging.LoadState.NotLoading
 import androidx.paging.compose.LazyPagingItems
 import com.intechbel.techtask.design.R
+import com.intechbel.techtask.design.theme.AppTheme
 
 @Composable
 fun <T : Any> ThPagination(
@@ -116,7 +116,7 @@ private fun PaginationLoader() {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 16.dp),
+            .padding(vertical = AppTheme.dimens.padding.medium),
         contentAlignment = Alignment.Center
     ) {
         Text(stringResource(R.string.pagination_loading))
@@ -130,21 +130,21 @@ private fun PaginationOnError(retry: () -> Unit) {
             modifier = Modifier
                 .background(
                     color = androidx.compose.material3.MaterialTheme.colorScheme.errorContainer,
-                    shape = RoundedCornerShape(8.dp)
+                    shape = RoundedCornerShape(AppTheme.dimens.borderRadius.radius8)
                 )
-                .padding(16.dp)
+                .padding(AppTheme.dimens.padding.medium)
         ) {
             Icon(
                 imageVector = Icons.Default.Refresh,
                 contentDescription = null,
                 tint = androidx.compose.material3.MaterialTheme.colorScheme.onErrorContainer,
                 modifier = Modifier
-                    .size(24.dp)
+                    .size(AppTheme.dimens.iconSize.medium)
                     .background(
                         color = androidx.compose.material3.MaterialTheme.colorScheme.errorContainer,
-                        shape = RoundedCornerShape(4.dp)
+                        shape = RoundedCornerShape(AppTheme.dimens.borderRadius.radius4)
                     )
-                    .padding(4.dp)
+                    .padding(AppTheme.dimens.padding.tripleExtraSmall)
                     .clickable { retry() }
             )
         }

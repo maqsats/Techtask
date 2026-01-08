@@ -28,9 +28,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.intechbel.techtask.design.image.ThImage
+import com.intechbel.techtask.design.theme.AppTheme
 import com.intechbel.techtask.feature.users.R
 import com.intechbel.techtask.feature.users.presentation.core.IUserDetailsComponent
 import com.intechbel.techtask.feature.users.presentation.core.UserDetailsIntent
@@ -71,17 +70,20 @@ fun UserDetailsLayout(
                 .padding(paddingValues)
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
-                .padding(horizontal = 16.dp, vertical = 12.dp),
-            verticalArrangement = Arrangement.spacedBy(12.dp)
+                .padding(
+                    horizontal = AppTheme.dimens.padding.medium,
+                    vertical = AppTheme.dimens.padding.small
+                ),
+            verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.padding.small)
         ) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(16.dp)
+                horizontalArrangement = Arrangement.spacedBy(AppTheme.dimens.padding.medium)
             ) {
                 ThImage(
                     modifier = Modifier
-                        .height(120.dp)
+                        .height(AppTheme.dimens.componentSize.profileImageHeight)
                         .fillMaxWidth(0.35f),
                     image = user.picture,
                     contentDescription = stringResource(R.string.content_description_user_profile_picture)
@@ -89,10 +91,10 @@ fun UserDetailsLayout(
                 Column(modifier = Modifier.weight(1f)) {
                     Text(
                         text = "${user.name.title} ${user.name.first} ${user.name.last}",
-                        fontSize = 20.sp,
+                        fontSize = AppTheme.dimens.fontSize.fontSize20,
                         fontWeight = FontWeight.Bold,
                     )
-                    Spacer(modifier = Modifier.height(8.dp))
+                    Spacer(modifier = Modifier.height(AppTheme.dimens.padding.doubleExtraSmall))
                     DetailRow(label = stringResource(R.string.user_email_label), value = user.email)
                     user.phone?.takeIf { it.isNotBlank() }?.let {
                         DetailRow(label = stringResource(R.string.user_phone_label), value = it)
@@ -102,7 +104,7 @@ fun UserDetailsLayout(
 
             Text(
                 text = stringResource(R.string.user_location_title),
-                fontSize = 18.sp,
+                fontSize = AppTheme.dimens.fontSize.fontSize18,
                 fontWeight = FontWeight.SemiBold,
             )
             DetailRow(
@@ -113,8 +115,8 @@ fun UserDetailsLayout(
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(280.dp)
-                    .clip(RoundedCornerShape(16.dp)),
+                    .height(AppTheme.dimens.componentSize.mapHeight)
+                    .clip(RoundedCornerShape(AppTheme.dimens.borderRadius.radius16)),
             ) {
                 ThMap(
                     modifier = Modifier.fillMaxSize(),
@@ -137,16 +139,16 @@ private fun DetailRow(
     value: String,
 ) {
     Column(
-        verticalArrangement = Arrangement.spacedBy(4.dp)
+        verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.padding.tripleExtraSmall)
     ) {
         Text(
             text = label,
-            fontSize = 12.sp,
+            fontSize = AppTheme.dimens.fontSize.fontSize12,
             fontWeight = FontWeight.Medium,
         )
         Text(
             text = value,
-            fontSize = 14.sp,
+            fontSize = AppTheme.dimens.fontSize.fontSize14,
             fontWeight = FontWeight.Normal,
         )
     }

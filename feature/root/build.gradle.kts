@@ -12,6 +12,7 @@ android {
 }
 
 dependencies {
+    implementation(projects.core.design)
     implementation(projects.core.shared)
     implementation(projects.core.network)
     implementation(projects.core.pagination)

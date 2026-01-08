@@ -1,5 +1,6 @@
 package com.intechbel.techtask.feature.root.presentation.ui
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.navigationBarsPadding
@@ -7,6 +8,7 @@ import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.arkivanov.decompose.extensions.compose.subscribeAsState
+import com.intechbel.techtask.design.theme.AppTheme
 import com.intechbel.techtask.feature.root.presentation.core.IRootComponent
 import com.intechbel.techtask.feature.users.presentation.ui.UserDetailsLayout
 import com.intechbel.techtask.feature.users.presentation.ui.UserLayout
@@ -22,6 +24,7 @@ fun RootLayout(
     Box(
         modifier = modifier
             .fillMaxSize()
+            .background(AppTheme.palette.background)
             .statusBarsPadding()
             .navigationBarsPadding()
     ) {
